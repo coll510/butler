@@ -1,0 +1,52 @@
+
+{% load widget_tweaks %}
+
+<form method="post" action="">
+    {% csrf_token %}
+    
+    <!-- non ajax form to post a new topic -->
+    <!-- Be sure to add extend base.html above and re-add form title "Post a new topic."
+    in views.py, comment out def topics, topiccreateview, and uncomment post_topic.
+    remove all related import statements for bsmodal, etc.
+    in url.py, change post topic path to function post_topic instead of topiccreateview
+    and comment out topics path. -->
+
+    <!-- <table>
+        {{form.as_table}}
+    
+     </table>
+    <input type="submit" value="Submit" />
+    </form> -->
+   
+   <div class="modal-header">
+      <h5 class="modal-title">Post New Topic</h5> 
+      <!-- button trigger modal -->
+      <button type="button" class="close" data-dismiss="modal" data-toggle="collapse" data-target="#post-topic-modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div> 
+
+  
+    <div class="modal-body">
+     
+      {% for field in form %}
+        <div class="form-group{% if field.errors %} invalid{% endif %}">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% for error in field.errors %}
+            <p class="help-block">{{ error }}</p>
+          {% endfor %}
+        </div>
+      {% endfor %}
+     
+    </div>
+  
+    <div class="modal-footer">
+      <button type="button" class="post-topic btn btn-default" data-dismiss="modal">Close</button>
+      <button type="submit" class="post-topic btn btn-primary">Post</button>
+    </div>
+
+  </form>
+
+  
+

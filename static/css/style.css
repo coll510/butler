@@ -1,0 +1,7 @@
+.container-forum {
+    border: 2px solid rgb(182, 31, 31);
+    background-color: rgb(51, 19, 19);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+  }

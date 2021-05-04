@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Earthseed Event Sign Up</title>
+</head>
+<body>
+
+{% extends 'earthseed/base.html' %}
+{% block content %}
+<div class="container">
+
+<h1 style="text-align: center;">Earthseed Events</h1>
+
+<br>
+<ul style="list-style-type:none;">
+    {% for event in object_list %}
+    <h3>{{ event.title }} </h3>
+    <li>{{ event.date }} </li>    
+    <li>Facilitated by {{ event.facilitator }} </li>   
+        
+   
+    <p><a href = "{% url 'event_signup' %}">Register</a></p>
+    <hr>
+    <br>
+    {% endfor %}
+</ul>
+
+{% endblock %}
+</div>
+</body>
+</html>
+
+

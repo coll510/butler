@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% extends 'earthseed/base.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}"> -->
+    <title>Forum Discussions</title>
+</head>
+<body>
+    
+    {% block content %} 
+    <div class="container">
+    <h1>Discussion Forum</h1>
+
+
+    {%for topic in topics %}            
+                <div>
+                    <br>
+                        <h3>{{topic.forum}}</h3>
+                        <h3>{{topic.title}}</h3> 
+                        
+                                <p>By: {{topic.member_id}}
+                                    <br>{{topic.content}}</p>
+                            </h5>
+                            <hr>
+                             
+                            <h4>Member replies</h4>
+                            {%for reply in replies%}
+                                {{reply}}
+                                {%for item in reply%}  
+                                    {% if item.topic  == topic %}
+                                    {{item.reply}}
+                               <br>
+                                    {% endif %}
+                            
+                           
+                            {%endfor%}
+                            {%endfor%}
+
+                            {%endfor%}
+
+
+                            {% endblock %}
+                    </div>
+    </div>
+</body>
+</html>

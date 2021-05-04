@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post Reply</title>
+    <style>
+        h2 {
+            text-align: center
+        }
+        form{
+            border:4px solid black;
+            margin: 0 auto;
+            padding: 40px;
+            width: fit-content;
+        }
+    </style>
+</head>
+<body>
+    {% extends 'earthseed/base.html' %}
+    {% block content %} 
+    <div class="container">     
+        <h2>Forum Topic Discussion: Post a Response</h2>
+
+        <form action="/post_reply/" method="post">
+            {% csrf_token %}
+            <table>
+                {{form.as_table}}
+            </table>
+            <input type="submit" value="Submit" />
+        </form>
+        
+    {% endblock %}
+    </div>
+</body>
+</html>

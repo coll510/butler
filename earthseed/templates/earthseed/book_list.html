@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Forums</title>
+    <style>
+        h3 , h5{
+            text-align: center
+        }
+        a:link {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    {% extends 'earthseed/base.html' %}
+
+{% block content %}
+
+<div class="jumbotron">
+    <div class="container">
+      <h3 class="display-4"> Octavia E. Butler</h3>
+      <img src = "media/octavia_butler.jpeg" style="float:right;margin:0px 0px" alt="Octavia E. Butler" width="320" height="300" >
+      <p class="lead" >(1947–2006) <br>
+            OCTAVIA E. BUTLER was a renowned African American author who received a MacArthur “Genius” Grant and 
+            PEN West Lifetime Achievement Award for her body of work. Born in Pasadena in 1947, she was raised by her
+             mother and her grandmother.  She was the author of several award-winning novels including 
+             PARABLE OF THE SOWER (1993), which was a New York Times Notable Book of the Year, and 
+             PARABLE OF THE TALENTS (1995) winner of the Nebula Award for the best science fiction novel 
+             published that year. She was acclaimed for her lean prose, strong protagonists, and social 
+             observations in stories that range from the distant past to the far future. Her dystopian novels explorie themes of Black 
+             injustice, global warming, women’s rights and political disparity, and other issues facing humanity. </p>
+    </div>
+  </div>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+
+        {% for book in object_list %}
+        <div class="col-md-3">
+        <h5> {{book.title}}</h5>
+        
+        <img class="img-thumbnail" src="{{MEDIA_URL}}{{book.image.url}}" alt="image" style="height: 25em;">
+        <ul style="list-style-type:none;">
+            <li><a href = "{% url 'forum_list' %}" style="color:rgb(39, 37, 37)">Forum</a></li>
+            <li><a href = "{% url 'order_book' %}" style="color:rgb(39, 37, 37)">Purchase {{ book.title }}</a></li>
+            {% for event in book.events.all %}
+            <li> <a href= "{% url 'event_signup' %}"  >Event: {{ event.title}}</a></li>
+            {% endfor %}
+        </ul>
+
+            <!-- if last column in row -->
+            {% if forloop.counter|divisibleby:4 and not forloop.last %}
+        </div>
+    <div class="row">
+{% endif %}
+    </div>
+    
+<br>
+<br>
+{% endfor %}
+</div>
+
+</div>
+
+
+{% endblock %}
+

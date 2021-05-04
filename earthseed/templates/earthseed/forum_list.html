@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Forums</title>
+    <style>
+        h1 {
+            text-align:center;
+        }
+        h2 {
+            text-align:center;
+            font-style: italic;
+        }
+        h5 {
+            font-style: italic;
+        }
+        
+        .box{
+            border: 1px solid black;
+            margin: 0 auto;
+            padding: 10px
+        }
+        .topic-post-link {
+            text-align:center;
+        }
+        .post-link-button:link, .post-link-button:visited {
+            background-color: white;
+            color: black;
+            border: 2px solid blue;
+            padding: 5px 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .post-link-button:hover, .post-link-button:active {
+            background-color: blue;
+            color: white;
+        }
+    </style>    
+</head>
+
+<body>
+    {% extends 'earthseed/base.html' %}
+    {% load static %}
+    
+    
+    {% block content %}
+    
+    <div class="container"> 
+        <h1>Earthseed Discussion Forums</h1>
+        <br><br>
+     
+   
+        {%for forum in forums %}
+    
+        <h2>{{forum.name}}</h2>
+            <!-- Non ajax post a new topic link -->
+        <div class="topic-post-link">
+            <a href = "{% url 'post_topic' %}" class="post-link-button">Post a New Topic</a></div>
+            <!-- Post topic button -->
+            <button id="post-topic" class="post-topic btn btn-primary" type="button" name="button"
+            data-toggle="collapse" data-target="#post-topic-modal">Post New Topic</button>
+        
+        <div class="modal fade" tabindex="-1" role="dialog" id="post-topic-modal">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                {% include 'earthseed/post_topic.html' %}
+            
+            </div>
+            </div>
+        </div>
+            
+        
+        <br>
+        
+        {% for topic in forum.topics.all %}
+        <div class="box">
+            <h4 style= "color: blue;">{{topic.title}}</h4>
+            <p>
+                By: {{topic.member_id}}<br>
+                {{topic.content}}
+            </p>
+            <hr style="height:5px;border-width:0;color:gray;background-color:gray">
+        
+            <h5>Member Responses</h5>
+            <a href = "{% url 'post_reply' %}" class="post-link-button">Post a Response</a>
+            {%for reply in topic.replies.all %}
+        
+                <p> By: {{reply.member_id}}<br>
+                    {{reply.comment}}
+                    <hr>
+                </p>
+            
+                <br>
+            {%endfor%} 
+        </div>    
+        {%endfor%}
+
+        <br>
+        <br>
+        {%endfor%}
+    
+    {% endblock %}
+
+</div>
+
+<script type="text/javascript">
+    // post topic click event opens form in modal with id="post-topic-modal" and appends formURL to modal
+    $(document).ready(function() {
+    $("#post-topic").modalForm({
+        formURL: "{% url 'post_topic' %}",
+        modalID: "#post-topic-modal"
+    });
+  
+    $(function () {
+// # asyncSettings.successMessage
+        var asyncSuccessMessagePostTopic = [
+          "<div ",
+          "style='position:fixed;top:0;z-index:10000;width:100%;border-radius:0;' ",
+          "class='alert alert-icon alert-success alert-dismissible fade show mb-0' role='alert'>",
+          "Success: Topic was posted.",
+          "<button type='button' class='close' data-dismiss='alert' aria-label='Close'>",
+          "<span aria-hidden='true'>&times;</span>",
+          "</button>",
+          "</div>",
+          "<script>",
+          "$('.alert').fadeTo(2000, 500).slideUp(500, function () {$('.alert').slideUp(500).remove();});",
+          "<\/script>"
+        ].join();
+
+        // modal form
+        // # asyncSettings.addModalFormFunction
+        function postTopicModalForm() {
+            $("#post-topic").modalForm({
+              formURL: "{% url 'post_topic' %}",
+              modalID: "#post-topic-modal",
+              asyncUpdate: true,
+              asyncSettings: {
+                closeOnSubmit: true,
+                successMessage: asyncSuccessMessagePostTopic
+                dataUrl: "topics/",
+                dataElementId: null,
+                dataKey: null,
+                addModalFormFunction: postTopicModalForm
+              }
+            });
+          });
+        }
+        postTopicModalForm();
+    });
+        </script>
+        
+        
+<script src="{% static 'assets/js/jquery.js' %}"></script>
+<script src="{% static 'assets/js/bootstrap.js' %}"></script>
+
+<script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
+<!-- You can alternatively load the minified version -->
+<script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+</body>
+</html>

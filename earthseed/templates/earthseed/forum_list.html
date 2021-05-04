@@ -41,14 +41,14 @@
     </style>    
 </head>
 
-<body>
+<body >
     {% extends 'earthseed/base.html' %}
     {% load static %}
     
     
     {% block content %}
-    
-    <div class="container"> 
+    <br>
+    <div class="container" style="border:rgb(237, 237, 245); border-width:95px; border-style:solid;"> 
         <h1>Earthseed Discussion Forums</h1>
         <br><br>
      
@@ -56,6 +56,7 @@
         {%for forum in forums %}
     
         <h2>{{forum.name}}</h2>
+        <br>
             <!-- Non ajax post a new topic link -->
         <div class="topic-post-link">
             <a href = "{% url 'post_topic' %}" class="post-link-button">Post a New Topic</a></div>
@@ -109,10 +110,10 @@
 <script type="text/javascript">
     // post topic click event opens form in modal with id="post-topic-modal" and appends formURL to modal
     $(document).ready(function() {
-    $("#post-topic").modalForm({
-        formURL: "{% url 'post_topic' %}",
-        modalID: "#post-topic-modal"
-    });
+    // $("#post-topic").modalForm({
+    //     formURL: "{% url 'post_topic' %}",
+    //     modalID: "#post-topic-modal"
+    // });
   
     $(function () {
 // # asyncSettings.successMessage
@@ -139,7 +140,7 @@
               asyncUpdate: true,
               asyncSettings: {
                 closeOnSubmit: true,
-                successMessage: asyncSuccessMessagePostTopic
+                successMessage: asyncSuccessMessagePostTopic,
                 dataUrl: "topics/",
                 dataElementId: null,
                 dataKey: null,

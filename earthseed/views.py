@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, FormMixin
 from django.views import generic
 from django.http import JsonResponse
 
@@ -20,10 +20,13 @@ class BookList(ListView):
 class EventList(ListView):
     model = Event
 
-class ForumList(generic.ListView):
+class ForumList(generic.ListView, FormMixin):
     model = Forum
     template_name = 'forum_list.html'
     context_object_name = 'forums'
+    form_class = TopicForm
+
+
     
 # class TopicList(ListView):
 #     model = Topic

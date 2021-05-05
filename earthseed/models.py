@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 # Create your models here.
 
@@ -40,8 +41,8 @@ class Order(models.Model):
 
     book_id = models.ForeignKey(Book, on_delete=models.PROTECT)
     member_id = models.ForeignKey(Member, on_delete=models.PROTECT)
-    total = models.FloatField()
-    date = models.DateField()
+    total = models.FloatField(blank=True, null=True)
+    date = models.DateField(default=datetime.now())
 
 class Event_Attendance(models.Model):
 

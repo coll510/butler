@@ -36,7 +36,7 @@ def post_topic(request):
     if form.is_valid():
         # save the form data to model
         form.save()
-        return redirect('/')
+        return redirect('/forums/')
   
     context['form']= form
     return render(request, "earthseed/post_topic.html", context)
@@ -50,7 +50,7 @@ def post_reply(request):
       
     if form.is_valid():
         form.save()
-        return redirect('/')
+        return redirect('/forums/')
   
     context['form']= form
     return render(request, "earthseed/post_reply.html", context)
@@ -63,7 +63,7 @@ def event_signup(request):
 
     if form.is_valid():
         form.save()
-        return redirect('/')
+        return redirect('/events/')
 
     context['form']= form
     return render(request, "earthseed/event_signup.html", context)

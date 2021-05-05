@@ -1,27 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post Topic</title>
+    <style>
+        h2 {
+            text-align: center
+        }
+        form{
+            border:4px solid black;
+            margin: 0 auto;
+            padding: 40px;
+            width: fit-content;
+        }
+    </style>
+</head>
+<body>
+    {% extends 'earthseed/base.html' %}
+    {% block content %} 
+    <br>
+    <div class="container"> 
+      <h2>Forum Topic Discussion: Post a Topic</h2> 
 
-{% load widget_tweaks %}
 
-<form method="post" action="">
-    {% csrf_token %}
-    
-    <!-- non ajax form to post a new topic -->
-    <!-- Be sure to add extend base.html above and re-add form title "Post a new topic."
-    in views.py, comment out def topics, topiccreateview, and uncomment post_topic.
-    remove all related import statements for bsmodal, etc.
-    in url.py, change post topic path to function post_topic instead of topiccreateview
-    and comment out topics path. -->
+      <form method="post" action="">
+          {% csrf_token %}
 
-    <!-- <table>
-        {{form.as_table}}
-    
-     </table>
-    <input type="submit" value="Submit" />
-    </form> -->
+          <table>
+              {{form.as_table}}
+          
+          </table>
+          <input type="submit" value="Submit" />
+      </form>
+    {% endblock %}
    
-   <div class="modal-header">
-      <h5 class="modal-title">Post New Topic</h5> 
+    <!-- {% load widget_tweaks %} -->
+   <!-- <div class="modal-header">
+      <h5 class="modal-title">Post New Topic</h5>  -->
       <!-- button trigger modal -->
-      <button type="button" class="close" data-dismiss="modal" data-toggle="collapse" data-target="#post-topic-modal" aria-label="Close">
+      <!-- <button type="button" class="close" data-dismiss="modal" data-toggle="collapse" data-target="#post-topic-modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div> 
@@ -44,9 +61,9 @@
     <div class="modal-footer">
       <button type="button" class="post-topic btn btn-default" data-dismiss="modal">Close</button>
       <button type="submit" class="post-topic btn btn-primary">Post</button>
-    </div>
+    </div> -->
 
-  </form>
+  <!-- </form> -->
 
   
-
+  

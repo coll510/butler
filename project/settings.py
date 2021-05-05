@@ -139,3 +139,16 @@ STATIC_ROOT = os.path.join(BASE_DIR,  'static')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+JAZZMIN_SETTINGS = {
+    "site_logo": "../media/earthseed_image.png",
+    "welcome_sign": "Welcome to Butler's Earthseed",
+    "icons": {
+        "auth": "fas fa-globe-americas",
+        "auth.user": "fas fa-globe-americas",
+        "auth.Group": "fas fa-globe-americas",
+    },
+    "default_icon_parents": "fas fa-globe-americas",
+    "default_icon_children": "fas fa-seedling",
+
+}

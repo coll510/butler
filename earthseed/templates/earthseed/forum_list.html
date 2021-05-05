@@ -16,11 +16,11 @@
             font-style: italic;
         }
         
-        /* .box{
+        .box{
             border: 1px solid black;
             margin: 0 auto;
             padding: 10px
-        } */
+        }
         .topic-post-link {
             text-align:center;
         }
@@ -70,33 +70,19 @@
      
    
         {%for forum in forums %}
-        <div class="card">
-            <div class="card-header">
-                <h2 class="card-title">{{forum.name}}</h2>
-            
-        <!-- <h2>{{forum.name}}</h2> -->
+        
+        <h2>{{forum.name}}</h2>
         <br>
             <!-- Non ajax post a new topic link -->
         <div class="topic-post-link">
             <a href = "{% url 'post_topic' %}" class="post-link-button">Post a New Topic</a></div>
-            <!-- Post topic button -->
-            <button id="post-topic" class="post-topic btn btn-primary" type="button" name="button"
-            data-toggle="collapse" data-target="#post-topic-modal">Post New Topic</button>
-        
-        <div class="modal fade" tabindex="-1" role="dialog" id="post-topic-modal">
-            <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                {% include 'earthseed/post_topic.html' %}
-            </div>
-            </div>
-            </div>
-        </div>
+            
+            
             
         <br>
         
         {% for topic in forum.topics.all %}
-        <div class="card-body">
-        <!-- <div class="box"> -->
+        <div class="box">
             <h4 style= "color: blue;">{{topic.title}}</h4>
             <p>
                 By: {{topic.member_id}}<br>
@@ -125,7 +111,7 @@
         <br>
         <br>
         {%endfor%}
-    
+    </div>
     {% endblock %}
 <!-- </div> -->
 </div>
@@ -177,11 +163,5 @@
         </script>
         
         
-<script src="{% static 'assets/js/jquery.js' %}"></script>
-<script src="{% static 'assets/js/bootstrap.js' %}"></script>
-
-<script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
-<!-- You can alternatively load the minified version -->
-<script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
 </body>
 </html>

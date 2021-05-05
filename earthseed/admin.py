@@ -36,7 +36,6 @@ class TopicAdmin(admin.ModelAdmin):
     list_filter = ("forum", "member_id")
 
 class ReplyAdmin(admin.ModelAdmin):
-    # list_display = ("topic", "date_created")
     list_filter = ("member_id",)
 
 class MemberAdmin(admin.ModelAdmin):
@@ -57,3 +56,7 @@ admin.site.register(Event_Attendance)
 admin.site.register(Forum)
 admin.site.register(Topic, TopicAdmin)
 admin.site.register(Reply, ReplyAdmin)
+
+
+admin.site.site_header = "Earthseed Admin"
+admin.site.site_title = "Butler's Earthseed"

@@ -81,7 +81,8 @@ class Reply(models.Model):
         return self.comment
 
 
-
+    def get_absolute_url(self):
+        return reverse('edit_reply', kwargs={'pk': self.pk})
 
 
 

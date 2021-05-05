@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView, FormMixin
+from django.views.generic.edit import CreateView, FormMixin, UpdateView, DeleteView
 from django.views import generic
 from django.http import JsonResponse
 
@@ -258,3 +258,17 @@ def order_book(request):
     context['form']= form
     return render(request, "earthseed/order_book.html", context)
 
+class TopicUpdate(UpdateView):
+    model = Topic
+    fields = ['title', 'content']
+    success_url = reverse_lazy('forum_list')
+
+class ReplyUpdate(UpdateView):
+    model = Reply
+    fields = ['comment']
+    success_url = reverse_lazy('forum_list')
+    template_name_suffix = '_form'
+
+class ReplyDelete(DeleteView):
+    model = Reply
+    success_url = reverse_lazy('forum_list')

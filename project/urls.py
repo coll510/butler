@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import ListView 
+from django.views.generic.edit import CreateView, FormMixin, UpdateView, DeleteView
 from earthseed import views
 from earthseed.views import event_signup, order_book
 # from earthseed.views import post_topic, event_signup, order_book
@@ -37,6 +38,9 @@ urlpatterns = [
     # path('topics/', views.TopicList.as_view(), name='topic_list'),
     # path(r'^list$', views.forum_filter)
     # path('topics/', views.post_topic, name='post_topic'),
+    path('edit_topic/<int:pk>/', views.TopicUpdate.as_view(), name='edit_topic'),
+    path('edit_reply/<int:pk>/', views.ReplyUpdate.as_view(), name='edit_reply'),
+    path('delete_reply/<int:pk>/', views.ReplyDelete.as_view(), name='delete_reply'),
     
 
 ]
